@@ -29,7 +29,8 @@ namespace Practice_libMgmt
             label_allBrwdCnt.Text = QueryMain.Query_count("brwd");
 
             //연체 중인 도서 수
-//            label_allOverdueCnt.Text = DateManager.Books.Where((x) =>
+            QueryMain.Query_count("all");
+            label_allBrwdCnt.Text = QueryMain.Query_count("ovrd");
 
             viewAllUsers();
             viewAllBooks();
@@ -78,9 +79,9 @@ namespace Practice_libMgmt
         //대여 버튼 클릭
         private void button_Borrow_Click(object sender, EventArgs e)
         {
-            GetSetInfrm.userId = textBox_userID.Text;
-            GetSetInfrm.isbn = textBox_Isbn.Text;
-            GetSetInfrm.bookName =  textBox_bookName.Text;
+            string userId = textBox_userID.Text;
+            string isbn = textBox_Isbn.Text;
+            string bookName =  textBox_bookName.Text;
 
             if (textBox_Isbn.Text.Trim() == "" || textBox_bookName.Text.Trim() == "" || textBox_userID.Text.Trim() == "")
             {
@@ -88,7 +89,7 @@ namespace Practice_libMgmt
             }
             else
             {
-                ShowMessage(button_Borrow.Text, QueryMain.Query_Borrow());
+                ShowMessage(button_Borrow.Text, QueryMain.Query_Borrow(userId, isbn, bookName));
                 viewAllBooks();
             }
         }
@@ -96,9 +97,9 @@ namespace Practice_libMgmt
         //반납 버튼 클릭
         private void button_Return_Click(object sender, EventArgs e)
         {
-            GetSetInfrm.userId = textBox_userID.Text;
-            GetSetInfrm.isbn = textBox_Isbn.Text;
-            GetSetInfrm.bookName = textBox_bookName.Text;
+            string userId = textBox_userID.Text;
+            string isbn = textBox_Isbn.Text;
+            string bookName = textBox_bookName.Text;
 
             if (textBox_Isbn.Text.Trim() == "" || textBox_bookName.Text.Trim() == "" || textBox_userID.Text.Trim() == "")
             {
@@ -106,7 +107,7 @@ namespace Practice_libMgmt
             }
             else
             {
-                ShowMessage(button_Return.Text, QueryMain.Query_Return());
+                ShowMessage(button_Return.Text, QueryMain.Query_Return(userId, isbn, bookName));
                 viewAllBooks();
             }
         }

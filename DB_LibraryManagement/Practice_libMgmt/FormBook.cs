@@ -26,10 +26,10 @@ namespace Practice_libMgmt
             //사용자 추가
             button_add.Click += (sender, e) =>
             {
-                GetSetInfrm.isbn = textBox_isbn.Text;
-                GetSetInfrm.bookName = textBox_bookName.Text;
-                GetSetInfrm.publisher = textBox_publisher.Text;
-                GetSetInfrm.page = textBox_page.Text;
+                string isbn = textBox_isbn.Text;
+                string bookName = textBox_bookName.Text;
+                string publisher = textBox_publisher.Text;
+                string page = textBox_page.Text;
 
                 if (textBox_isbn.Text.Trim() == "" || textBox_bookName.Text.Trim() == ""
                  || textBox_publisher.Text.Trim() == "" || textBox_page.Text.Trim() == "")
@@ -38,7 +38,7 @@ namespace Practice_libMgmt
                 }
                 else
                 {
-                    ShowMessage(button_add.Text, QueryBook.Query_add());
+                    ShowMessage(button_add.Text, QueryBook.Query_add(isbn, bookName, publisher, page));
                     viewAllBooks();
                 }
             };
@@ -46,10 +46,10 @@ namespace Practice_libMgmt
             //사용자 수정
             button_modify.Click += (sender, e) =>
             {
-                GetSetInfrm.isbn = textBox_isbn.Text;
-                GetSetInfrm.bookName = textBox_bookName.Text;
-                GetSetInfrm.publisher = textBox_publisher.Text;
-                GetSetInfrm.page = textBox_page.Text;
+                string isbn = textBox_isbn.Text;
+                string bookName = textBox_bookName.Text;
+                string publisher = textBox_publisher.Text;
+                string page = textBox_page.Text;
 
                 if (textBox_isbn.Text.Trim() == "" || textBox_bookName.Text.Trim() == ""
                     || textBox_publisher.Text.Trim() == "" || textBox_page.Text.Trim() == "")
@@ -58,7 +58,7 @@ namespace Practice_libMgmt
                 }
                 else
                 {
-                    ShowMessage(button_modify.Text, QueryBook.Query_modify());
+                    ShowMessage(button_modify.Text, QueryBook.Query_modify(isbn, bookName, publisher, page));
                     viewAllBooks();
                 }
             };
@@ -66,7 +66,7 @@ namespace Practice_libMgmt
             //사용자 삭제
             button_delete.Click += (sender, e) =>
             {
-                GetSetInfrm.isbn = textBox_isbn.Text;
+                string isbn = textBox_isbn.Text;
 
                 if (textBox_isbn.Text.Trim() == "" || textBox_bookName.Text.Trim() == ""
                     || textBox_publisher.Text.Trim() == "" || textBox_page.Text.Trim() == "")
@@ -75,7 +75,7 @@ namespace Practice_libMgmt
                 }
                 else
                 {
-                    ShowMessage(button_delete.Text, QueryBook.Query_delete());
+                    ShowMessage(button_delete.Text, QueryBook.Query_delete(isbn));
                     viewAllBooks();
                 }
             };
@@ -143,6 +143,11 @@ namespace Practice_libMgmt
             MessageBox.Show(showMessage);
             listBox1.Items.Insert(0, activeMessage);
             WriteLog(activeMessage);
+        }
+
+        private void button_add_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }

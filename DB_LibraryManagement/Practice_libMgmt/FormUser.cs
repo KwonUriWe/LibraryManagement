@@ -27,8 +27,8 @@ namespace Practice_libMgmt
             //사용자 추가
             button_add.Click += (sender, e) =>
             {
-                GetSetInfrm.userId = textBox_id.Text;
-                GetSetInfrm.userName = textBox_name.Text;
+                string userId = textBox_id.Text;
+                string userName = textBox_name.Text;
 
                 if (textBox_id.Text.Trim() == "" || textBox_name.Text.Trim() == "")
                 {
@@ -36,7 +36,7 @@ namespace Practice_libMgmt
                 }
                 else
                 {
-                    ShowMessage(button_add.Text, QueryUser.Query_add());
+                    ShowMessage(button_add.Text, QueryUser.Query_add(userId, userName));
                     viewAllUsers();
                 }
             };
@@ -44,8 +44,8 @@ namespace Practice_libMgmt
             //사용자 수정
             button_modify.Click += (sender, e) =>
             {
-                GetSetInfrm.userId = textBox_id.Text;
-                GetSetInfrm.userName = textBox_name.Text;
+                string userId = textBox_id.Text;
+                string userName = textBox_name.Text;
 
                 if (textBox_id.Text.Trim() == "" || textBox_name.Text.Trim() == "")
                 {
@@ -53,7 +53,7 @@ namespace Practice_libMgmt
                 }
                 else
                 {
-                    ShowMessage(button_modify.Text, QueryUser.Query_modify());
+                    ShowMessage(button_modify.Text, QueryUser.Query_modify(userId, userName));
                     viewAllUsers();
                 }
             };
@@ -61,8 +61,8 @@ namespace Practice_libMgmt
             //사용자 삭제
             button_delete.Click += (sender, e) =>
             {
-                GetSetInfrm.userId = textBox_id.Text;
-                GetSetInfrm.userName = textBox_name.Text;
+                string userId = textBox_id.Text;
+                string userName = textBox_name.Text;
 
                 if (textBox_id.Text.Trim() == "" || textBox_name.Text.Trim() == "")
                 {
@@ -70,7 +70,7 @@ namespace Practice_libMgmt
                 }
                 else
                 {
-                    ShowMessage(button_delete.Text, QueryUser.Query_delete());
+                    ShowMessage(button_delete.Text, QueryUser.Query_delete(userId));
                     viewAllUsers();
                 }
             };

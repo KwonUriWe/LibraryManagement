@@ -11,11 +11,11 @@ namespace Practice_libMgmt
     class QueryMain
     {
         //대여 쿼리
-        public static string Query_Borrow()
+        public static string Query_Borrow(string userId, string isbn, string bookName)
         {
             try
             {
-                if (Query_checkBrwng()) //대여 여부 참
+                if (Query_checkBrwng(isbn)) //대여 여부 참
                 {
                     return "대여 중인 도서.";
                 }
@@ -28,14 +28,14 @@ namespace Practice_libMgmt
                     SqlCommand cmd = new SqlCommand();
                     cmd.Connection = ConnDB.conn;
                     cmd.CommandType = CommandType.Text;
-                    cmd.Parameters.AddWithValue("@p1", int.Parse(GetSetInfrm.userId));
-                    cmd.Parameters.AddWithValue("@p2", Query_userName());
+                    cmd.Parameters.AddWithValue("@p1", int.Parse(userId));
+                    cmd.Parameters.AddWithValue("@p2", Query_userName(userId));
                     cmd.Parameters.AddWithValue("@p3", today);
-                    cmd.Parameters.AddWithValue("@p4", GetSetInfrm.isbn);
+                    cmd.Parameters.AddWithValue("@p4", isbn);
                     cmd.CommandText = sqlcommand;
                     cmd.ExecuteNonQuery();
 
-                    string content = "\"" + Query_userName() + "\"님. \"" + GetSetInfrm.bookName + "\" 대여 완료.";
+                    string content = "\"" + Query_userName(userId) + "\"님. \"" + bookName + "\" 대여 완료.";
 
                     ConnDB.conn.Close();
 
@@ -49,31 +49,32 @@ namespace Practice_libMgmt
         }
 
         //반납 쿼리
-        public static string Query_Return()
+        public static string Query_Return(string userId, string isbn, string bookName)
         {
             try
             {
-                if (Query_checkBrwng()) //대여 여부 참
+                if (Query_checkBrwng(isbn)) //대여 여부 참
                 {
                     ConnDB.ConnectDB();
                     string sqlcommand = "Update Books " +
-                                        "set userId = @p1 userName = @p2, isBorrowed = 0, BorrowedAt = @p3 where Isbn = @p4";
+                                        "set userId = @p1 userName = @p2, isBorrowed = 0, BorrowedAt = @p3 where Isbn = @p4 and userId = @p5";
                     SqlCommand cmd = new SqlCommand();
                     cmd.Connection = ConnDB.conn;
                     cmd.CommandType = CommandType.Text;
                     cmd.Parameters.AddWithValue("@p1", 0);
                     cmd.Parameters.AddWithValue("@p2", "");
                     cmd.Parameters.AddWithValue("@p3", new DateTime());
-                    cmd.Parameters.AddWithValue("@p4", GetSetInfrm.isbn);
+                    cmd.Parameters.AddWithValue("@p4", isbn);
+                    cmd.Parameters.AddWithValue("@p4", userId);
                     cmd.CommandText = sqlcommand;
                     cmd.ExecuteNonQuery();
 
-                    string content1 = "\"" + Query_userName() + "\"님. \"" + GetSetInfrm.bookName + "\" 반납 완료. (연체)";
-                    string content2 = "\"" + Query_userName() + "\"님. \"" + GetSetInfrm.bookName + "\" 반납 완료.";
+                    string content1 = "\"" + Query_userName(userId) + "\"님. \"" + bookName + "\" 반납 완료. (연체)";
+                    string content2 = "\"" + Query_userName(userId) + "\"님. \"" + bookName + "\" 반납 완료.";
 
                     ConnDB.conn.Close();
 
-                    if (Query_checkOvrd() > 7)
+                    if (Query_checkOvrd(isbn) > 7)
                     {
                         return content1;
                     }
@@ -94,14 +95,14 @@ namespace Practice_libMgmt
         }
 
         //사용자 ID에 대한 사용자 이름 확인 쿼리
-        public static string Query_userName()
+        public static string Query_userName(string userId)
         {
             //ConnDB.ConnectDB();
 
             SqlCommand cmd = new SqlCommand();
             cmd.Connection = ConnDB.conn;
             cmd.CommandText = "Select * From Users Where Id = @p1";
-            cmd.Parameters.AddWithValue("@p1", int.Parse(GetSetInfrm.userId));
+            cmd.Parameters.AddWithValue("@p1", int.Parse(userId));
 
             SqlDataAdapter da = new SqlDataAdapter(cmd);
             DataSet ds = new DataSet();
@@ -115,14 +116,14 @@ namespace Practice_libMgmt
         }
 
         //도서 대여 여부 확인 쿼리
-        public static bool Query_checkBrwng()
+        public static bool Query_checkBrwng(string isbn)
         {
             ConnDB.ConnectDB();
 
             SqlCommand cmd1 = new SqlCommand();
             cmd1.Connection = ConnDB.conn;
             cmd1.CommandText = "Select * From Books Where Isbn = @p1";
-            cmd1.Parameters.AddWithValue("@p1", GetSetInfrm.isbn);
+            cmd1.Parameters.AddWithValue("@p1", isbn);
 
             SqlDataAdapter da = new SqlDataAdapter(cmd1);
             DataSet ds = new DataSet();
@@ -136,14 +137,14 @@ namespace Practice_libMgmt
         }
         
         //연체 여부 확인 쿼리
-        public static int Query_checkOvrd()
+        public static int Query_checkOvrd(string isbn)
         {
             ConnDB.ConnectDB();
 
             SqlCommand cmd = new SqlCommand();
             cmd.Connection = ConnDB.conn;
             cmd.CommandText = "Select * From Books Where Isdn = @p1";
-            cmd.Parameters.AddWithValue("@p1", GetSetInfrm.isbn);
+            cmd.Parameters.AddWithValue("@p1", isbn);
 
             SqlDataAdapter da = new SqlDataAdapter(cmd);
             DataSet ds = new DataSet();
@@ -187,10 +188,10 @@ namespace Practice_libMgmt
                     da.Fill(ds, "Books");
                     break;
 
-                //case "ovrd":
-                //    cmd.CommandText = "Select * From Books";
-                //    da.Fill(ds, "Books");
-                //    break;
+                case "ovrd": 
+                    cmd.CommandText = "Select* FromBooks where datediff(dd, BorrowedAt, CONVERT(date, GETDATE())) >= 7";
+                    da.Fill(ds, "Books");
+                    break;
             }
             
             int count = ds.Tables[0].Rows.Count;
@@ -200,10 +201,5 @@ namespace Practice_libMgmt
             return count.ToString();
         }
 
-        ////연체 중인 도서 수
-        //label_allOverdueCnt.Text = DateManager.Books.Where((x) =>
-        //{
-        //    return x.isBorrowed && x.BorrowedAt.AddDays(7) > DateTime.Now;
-        //}).Count().ToString();
     }
 }

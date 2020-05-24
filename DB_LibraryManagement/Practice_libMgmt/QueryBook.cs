@@ -11,27 +11,27 @@ namespace Practice_libMgmt
     class QueryBook
     {
         //추가 쿼리
-        public static string Query_add()
+        public static string Query_add(string isbn, string bookName, string publisher, string page)
         {
             try
             {
-                if (CheckDplct() == 0)
+                if (CheckDplct(isbn) == 0)
                 {
                     ConnDB.ConnectDB();
                     string sqlcommand = "Insert into Books (Isbn, Name, Publisher, Page, isBorrowed) Values (@p1, @p2, @p3, @p4, 0)";
                     SqlCommand cmd = new SqlCommand();
                     cmd.Connection = ConnDB.conn;
                     cmd.CommandType = CommandType.Text;
-                    cmd.Parameters.AddWithValue("@p1", GetSetInfrm.isbn);
-                    cmd.Parameters.AddWithValue("@p2", GetSetInfrm.bookName);
-                    cmd.Parameters.AddWithValue("@p3", GetSetInfrm.publisher);
-                    cmd.Parameters.AddWithValue("@p4", int.Parse(GetSetInfrm.page));
+                    cmd.Parameters.AddWithValue("@p1", isbn);
+                    cmd.Parameters.AddWithValue("@p2", bookName);
+                    cmd.Parameters.AddWithValue("@p3", publisher);
+                    cmd.Parameters.AddWithValue("@p4", int.Parse(page));
                     cmd.CommandText = sqlcommand;
                     cmd.ExecuteNonQuery();
 
                     ConnDB.conn.Close();
 
-                    return GetSetInfrm.isbn + " 도서 정보 추가 완료.";
+                    return isbn + " 도서 정보 추가 완료.";
                 }
                 else
                 {
@@ -46,11 +46,11 @@ namespace Practice_libMgmt
         }
 
         //수정 쿼리
-        public static string Query_modify()
+        public static string Query_modify(string isbn, string bookName, string publisher, string page)
         {
             try
             {
-                if (CheckDplct() == 0)
+                if (CheckDplct(isbn) == 0)
                 {
                     return "존재하지 않는 Isbn.  Isbn값 수정 불가.";
                 }
@@ -61,16 +61,16 @@ namespace Practice_libMgmt
                     SqlCommand cmd = new SqlCommand();
                     cmd.Connection = ConnDB.conn;
                     cmd.CommandType = CommandType.Text;
-                    cmd.Parameters.AddWithValue("@p1", GetSetInfrm.bookName);
-                    cmd.Parameters.AddWithValue("@p2", GetSetInfrm.publisher);
-                    cmd.Parameters.AddWithValue("@p3", int.Parse(GetSetInfrm.page));
-                    cmd.Parameters.AddWithValue("@p4", GetSetInfrm.isbn);
+                    cmd.Parameters.AddWithValue("@p1", bookName);
+                    cmd.Parameters.AddWithValue("@p2", publisher);
+                    cmd.Parameters.AddWithValue("@p3", int.Parse(page));
+                    cmd.Parameters.AddWithValue("@p4", isbn);
                     cmd.CommandText = sqlcommand;
                     cmd.ExecuteNonQuery();
 
                     ConnDB.conn.Close();
 
-                    return GetSetInfrm.isbn + " 도서 정보 수정 완료.";
+                    return isbn + " 도서 정보 수정 완료.";
                 }
             }
             catch (Exception e)
@@ -80,11 +80,11 @@ namespace Practice_libMgmt
         }
 
         //삭제 쿼리
-        public static string Query_delete()
+        public static string Query_delete(string isbn)
         {
             try
             {
-                if (CheckDplct() == 0)
+                if (CheckDplct(isbn) == 0)
                 {
                     return "존재하지 않는 Isbn. Isbn값 삭제 불가.";
                 }
@@ -95,13 +95,13 @@ namespace Practice_libMgmt
                     SqlCommand cmd = new SqlCommand();
                     cmd.Connection = ConnDB.conn;
                     cmd.CommandType = CommandType.Text;
-                    cmd.Parameters.AddWithValue("@p1", GetSetInfrm.isbn);
+                    cmd.Parameters.AddWithValue("@p1", isbn);
                     cmd.CommandText = sqlcommand;
                     cmd.ExecuteNonQuery();
 
                     ConnDB.conn.Close();
 
-                    return GetSetInfrm.isbn + " 도서 정보 삭제 완료.";
+                    return isbn + " 도서 정보 삭제 완료.";
                 }
             }
             catch (Exception e)
@@ -111,14 +111,14 @@ namespace Practice_libMgmt
         }
 
         //Isbn 존재 여부 확인 쿼리
-        public static int CheckDplct()
+        public static int CheckDplct(string isbn)
         {
             ConnDB.ConnectDB();
 
             SqlCommand cmd = new SqlCommand();
             cmd.Connection = ConnDB.conn;
             cmd.CommandText = "Select * From Books Where Isbn = @p1";
-            cmd.Parameters.AddWithValue("@p1", GetSetInfrm.isbn);
+            cmd.Parameters.AddWithValue("@p1", isbn);
 
             SqlDataAdapter da = new SqlDataAdapter(cmd);
             DataSet ds = new DataSet();
