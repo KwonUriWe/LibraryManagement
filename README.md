@@ -47,26 +47,27 @@
 
 #### 사용자 관리 화면 기능 확인
 
-- 사용자 추가
+- 사용자 추가   
+![K-012](https://user-images.githubusercontent.com/59382990/84111411-d6c4e900-aa61-11ea-96d0-5ce16c882bf1.jpg)
+![K-013](https://user-images.githubusercontent.com/59382990/84111412-d7f61600-aa61-11ea-82e1-a28f970d6c7b.jpg)
 
-
-- 기 등록된 사용자번호로 사용자 추가
+- 기 등록된 사용자번호로 사용자 추가   
 ![K-014](https://user-images.githubusercontent.com/59382990/84111545-1f7ca200-aa62-11ea-9aff-295d0a7c07f8.jpg)
 
-- 사용자 수정
+- 사용자 수정   
 ![K-001](https://user-images.githubusercontent.com/59382990/84111846-ab8ec980-aa62-11ea-9d96-4e17ded70baa.jpg)
 ![K-002](https://user-images.githubusercontent.com/59382990/84111849-acbff680-aa62-11ea-81c6-fa886c8150e2.jpg)
 
-- 없는 사용자번호로 사용자 수정
+- 없는 사용자번호로 사용자 수정   
 ![K-003](https://user-images.githubusercontent.com/59382990/84111850-ad588d00-aa62-11ea-81a9-5afcdc0792f3.jpg)
 
-- 사용자 삭제
+- 사용자 삭제   
 ![K-004](https://user-images.githubusercontent.com/59382990/84111853-adf12380-aa62-11ea-8732-0fb7da5f972e.jpg)
 
-- 없는 사용자번호로 사용자 삭제
+- 없는 사용자번호로 사용자 삭제   
 ![K-005](https://user-images.githubusercontent.com/59382990/84111855-ae89ba00-aa62-11ea-88f8-d4dfeb50dcc6.jpg)
 
-#### 로그파일 저장
+#### 로그파일 저장   
 ![K-006](https://user-images.githubusercontent.com/59382990/84112801-65d30080-aa64-11ea-9f62-2e9d298c3c72.jpg)
 
 ### 추후 개선해야 할 사항
