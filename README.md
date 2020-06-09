@@ -65,6 +65,9 @@
 #### 없는 사용자번호로 사용자 삭제
 ![K-005](https://user-images.githubusercontent.com/59382990/84111855-ae89ba00-aa62-11ea-88f8-d4dfeb50dcc6.jpg)
 
+### 로그파일 저장
+![K-006](https://user-images.githubusercontent.com/59382990/84112801-65d30080-aa64-11ea-9f62-2e9d298c3c72.jpg)
+
 ### 추후 개선해야 할 사항
 - 사용자 정보 수정 시 도서 정보에도 반영되도록 해야 한다.
 - 대여중인 도서가 있는 사용자일 경우 사용자 삭제가 불가하도록 해야 한다.
