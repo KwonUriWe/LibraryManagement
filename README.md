@@ -48,8 +48,7 @@
 #### 사용자 관리 화면 기능 확인
 
 - 사용자 추가
-![K-012](https://user-images.githubusercontent.com/59382990/84111411-d6c4e900-aa61-11ea-96d0-5ce16c882bf1.jpg)
-![K-013](https://user-images.githubusercontent.com/59382990/84111412-d7f61600-aa61-11ea-82e1-a28f970d6c7b.jpg)
+
 
 - 기 등록된 사용자번호로 사용자 추가
 ![K-014](https://user-images.githubusercontent.com/59382990/84111545-1f7ca200-aa62-11ea-9aff-295d0a7c07f8.jpg)
