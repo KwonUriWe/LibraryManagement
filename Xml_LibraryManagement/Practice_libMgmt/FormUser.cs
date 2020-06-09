@@ -144,5 +144,10 @@ namespace Practice_libMgmt
             textBox_id.Text = "";
             textBox_name.Text = "";
         }
+
+        private void button_modify_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }

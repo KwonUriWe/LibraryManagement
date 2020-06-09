@@ -122,7 +122,7 @@ namespace Practice_libMgmt
             {
                 Book book = DateManager.Books.Single((x) => x.Isbn == textBox_isbn.Text);   //입력값과 같은값의 Isbs을 가진 요소 반환
              
-                ShowMessage(button_delete.Text, textBox_isbn.Text + " 도서 정보 수정 완료.");
+                ShowMessage(button_delete.Text, textBox_isbn.Text + " 도서 정보 삭제 완료.");
                 DateManager.Books.Remove(book); //반환된 개체 삭제
 
                 dataGridView_booklist.DataSource = null;
