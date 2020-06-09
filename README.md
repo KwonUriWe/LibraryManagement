@@ -14,13 +14,36 @@
 
 ### 기능 테스트
 
-#### 대여, 반납
+#### 대여, 반납 (DB연결 프로그램 오류 발생. 추후 확인.)
 
-- 대여 (DB연결 프로그램 오류 발생. 추후 확인.)
+- 대여 완료   
 ![K-007](https://user-images.githubusercontent.com/59382990/84110252-7af96080-aa5f-11ea-9d3e-07b303c6558b.jpg)
 
-- 반납 (DB연결 프로그램 오류 발생. 추후 확인.)
+- 이미 대여 중인 도서로 대여 불가   
+![image](https://user-images.githubusercontent.com/59382990/84118068-7045c800-aa6d-11ea-9c20-9a2b0f8226b2.png)
+
+- 도서번호가 입력되지 않아 대여 불가
+![K-007](https://user-images.githubusercontent.com/59382990/84119146-edbe0800-aa6e-11ea-9abe-6ffc260cf0d8.jpg)
+
+- 존재하지 않는 도서 또는 사용자로 대여 불가
+![K-006](https://user-images.githubusercontent.com/59382990/84119137-eb5bae00-aa6e-11ea-8034-d8e29e302c30.jpg)
+
+- 반납 완료    
 ![K-008](https://user-images.githubusercontent.com/59382990/84110255-7c2a8d80-aa5f-11ea-89f6-1810b865ba20.jpg)
+
+- 연체된 도서 반납 완료   
+![K-001](https://user-images.githubusercontent.com/59382990/84120121-55c11e00-aa70-11ea-8975-f8c32f1e2308.jpg)
+
+- 대여 상태가 아닌 도서로 반납 불가   
+![K-001](https://user-images.githubusercontent.com/59382990/84119656-a6844700-aa6f-11ea-9cd9-a91b5a2d7f87.jpg)
+
+- 입력되지 않은 정보가 있어 반납 불가   
+![K-002](https://user-images.githubusercontent.com/59382990/84119662-a7b57400-aa6f-11ea-8672-83eab5198cc2.jpg)
+
+- 존재하지 않는 도서 또는 사용자로 대여 불가
+![K-003](https://user-images.githubusercontent.com/59382990/84119664-a84e0a80-aa6f-11ea-95fd-fccb4c1ccb5c.jpg)
+![K-004](https://user-images.githubusercontent.com/59382990/84119669-a97f3780-aa6f-11ea-812e-0b061f8f605d.jpg)
+
 
 #### 도서 관리
 
@@ -76,4 +99,5 @@
 - 대여중인 도서가 있는 사용자일 경우 사용자 삭제가 불가하도록 해야 한다.
 - 그리드 표 너비가 내용 텍스트 길이에 맞춰 변경되도록 수정하여 보기 수월하게 해야 한다.
 - DB 연결 프로그램에 대여, 대출 버튼에 대한 기능에 오류발생. 수정 해야한다.
+- 대여 상태인 도서를 존재하지 않는 사용자 정보로 반납시 반납완료 되어버림. 오류 수정 해야한다.
 
