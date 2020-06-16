@@ -1,5 +1,5 @@
 # LibraryManagement
-## Xml, DB를 이용한 도서 대여 관리 프로그램
+## C# Windows Forms와 MsSQL을 이용한 도서 대여 관리 프로그램
 
 ### 화면 구성
 
