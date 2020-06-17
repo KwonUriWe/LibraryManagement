@@ -1,0 +1,11 @@
+C:\Users\KB\Desktop\작업\포트폴리오\LibraryManagement\Practice_libMgmt\bin\Debug\Practice_libMgmt.exe.config
+C:\Users\KB\Desktop\작업\포트폴리오\LibraryManagement\Practice_libMgmt\bin\Debug\Practice_libMgmt.exe
+C:\Users\KB\Desktop\작업\포트폴리오\LibraryManagement\Practice_libMgmt\bin\Debug\Practice_libMgmt.pdb
+C:\Users\KB\Desktop\작업\포트폴리오\LibraryManagement\Practice_libMgmt\obj\Debug\LibraryManagement.csprojAssemblyReference.cache
+C:\Users\KB\Desktop\작업\포트폴리오\LibraryManagement\Practice_libMgmt\obj\Debug\LibraryManagement.FormMain.resources
+C:\Users\KB\Desktop\작업\포트폴리오\LibraryManagement\Practice_libMgmt\obj\Debug\LibraryManagement.FormBook.resources
+C:\Users\KB\Desktop\작업\포트폴리오\LibraryManagement\Practice_libMgmt\obj\Debug\LibraryManagement.FormUser.resources
+C:\Users\KB\Desktop\작업\포트폴리오\LibraryManagement\Practice_libMgmt\obj\Debug\Practice_libMgmt.Properties.Resources.resources
+C:\Users\KB\Desktop\작업\포트폴리오\LibraryManagement\Practice_libMgmt\obj\Debug\LibraryManagement.csproj.GenerateResource.cache
+C:\Users\KB\Desktop\작업\포트폴리오\LibraryManagement\Practice_libMgmt\obj\Debug\Practice_libMgmt.exe
+C:\Users\KB\Desktop\작업\포트폴리오\LibraryManagement\Practice_libMgmt\obj\Debug\Practice_libMgmt.pdb

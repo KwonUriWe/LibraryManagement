@@ -1,13 +1,7 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
 using System.Data;
 using System.Data.SqlClient;
-using System.Drawing;
 using System.IO;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace LibraryManagement
@@ -112,7 +106,7 @@ namespace LibraryManagement
         }
 
         //재입력 버튼 클릭
-        private void button1_Click(object sender, EventArgs e)
+        private void button_reset_Click(object sender, EventArgs e)
         {
             textBox_id.Text = "";
             textBox_name.Text = "";
@@ -121,7 +115,15 @@ namespace LibraryManagement
         //로그저장 메소드
         private void WriteLog(string contents)
         {
-            using (StreamWriter writer = new StreamWriter(@"./Log_LibraryManagement.txt", true))
+            //디렉토리 폴더가 없을 경우 폴더 생성
+            DirectoryInfo di = new DirectoryInfo(@"./LogFile");
+            if (!di.Exists)
+            {
+                di.Create();
+            }
+
+            //로그 내용 저장
+            using (StreamWriter writer = new StreamWriter(@"./LogFile/Lib_user.txt", true))
             {
                 writer.WriteLine(contents);
             }

@@ -1,13 +1,7 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
 using System.Data;
 using System.Data.SqlClient;
-using System.Drawing;
 using System.IO;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace LibraryManagement
@@ -31,7 +25,7 @@ namespace LibraryManagement
             label_allBrwdCnt.Text = QueryMain.Query_count("brwd");
 
             //연체 중인 도서 수
-            //abel_allOverdueCnt.Text = QueryMain.Query_count("ovrd");
+            label_allOverdueCnt.Text = QueryMain.Query_count("ovrd");
 
             viewAllUsers();
             viewAllBooks();
@@ -160,25 +154,6 @@ namespace LibraryManagement
             }
         }
 
-        //로그저장 메소드
-        private void WriteLog(string contents)
-        {
-            using (StreamWriter writer = new StreamWriter(@"./Log_LibraryManagement.txt", true))
-            {
-                writer.WriteLine(contents);
-            }
-        }
-
-        //메세지박스 팝업 + 로그저장 메소드 호출
-        private void ShowMessage(string clickedBtn, string showMessage)
-        {
-            string activeMessage = "[" + DateTime.Now.ToString() + "]  [ 대여/반납 관리 ]" +
-                                   "  <" + clickedBtn + ">  " + showMessage;
-            MessageBox.Show(showMessage);
-            listBox1.Items.Insert(0, activeMessage);
-            WriteLog(activeMessage);
-        }
-
         private void button_sBook_Click(object sender, EventArgs e)
         {
             int n1 = 0;
@@ -239,7 +214,7 @@ namespace LibraryManagement
 
                 SqlCommand cmd = new SqlCommand();
                 cmd.Connection = ConnDB.conn;
-                cmd.CommandText = "Select * From Users where UserId like @p1 order by Id";
+                cmd.CommandText = "Select * From Users where Id like @p1 order by Id";
                 cmd.Parameters.AddWithValue("@p1", sUser);
 
                 DataSet ds = new DataSet();
@@ -271,6 +246,33 @@ namespace LibraryManagement
             }
 
             return;
+        }
+
+        //로그저장 메소드
+        private void WriteLog(string contents)
+        {
+            //디렉토리 폴더가 없을 경우 폴더 생성
+            DirectoryInfo di = new DirectoryInfo(@"./LogFile");
+            if (!di.Exists)
+            {
+                di.Create();
+            }
+
+            //로그 내용 저장
+            using (StreamWriter writer = new StreamWriter(@"./LogFile/Lib_main.txt", true))
+            {
+                writer.WriteLine(contents);
+            }
+        }
+
+        //메세지박스 팝업 + 로그저장 메소드 호출
+        private void ShowMessage(string clickedBtn, string showMessage)
+        {
+            string activeMessage = "[" + DateTime.Now.ToString() + "]  [ 대여/반납 관리 ]" +
+                                   "  <" + clickedBtn + ">  " + showMessage;
+            MessageBox.Show(showMessage);
+            listBox1.Items.Insert(0, activeMessage);
+            WriteLog(activeMessage);
         }
     }
 }

@@ -1,10 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Data;
 using System.Data.SqlClient;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace LibraryManagement
 {
@@ -60,7 +56,7 @@ namespace LibraryManagement
                     cmd1.Connection = ConnDB.conn;
                     cmd1.CommandType = CommandType.Text;
                     cmd1.Parameters.AddWithValue("@p1", userName);
-                    cmd1.Parameters.AddWithValue("@p2", userId);
+                    cmd1.Parameters.AddWithValue("@p2", int.Parse(userId));
                     cmd1.CommandText = sqlcommand1;
                     cmd1.ExecuteNonQuery();
 
@@ -69,7 +65,7 @@ namespace LibraryManagement
                     cmd2.Connection = ConnDB.conn;
                     cmd2.CommandType = CommandType.Text;
                     cmd2.Parameters.AddWithValue("@p1", userName);
-                    cmd2.Parameters.AddWithValue("@p2", userId);
+                    cmd2.Parameters.AddWithValue("@p2", int.Parse(userId));
                     cmd2.CommandText = sqlcommand2;
                     cmd2.ExecuteNonQuery();
 
@@ -127,7 +123,7 @@ namespace LibraryManagement
             SqlCommand cmd = new SqlCommand();
             cmd.Connection = ConnDB.conn;
             cmd.CommandText = "Select isbn From Books Where UserId = @p1";
-            cmd.Parameters.AddWithValue("@p1", userId);
+            cmd.Parameters.AddWithValue("@p1", int.Parse(userId));
 
             SqlDataAdapter da = new SqlDataAdapter(cmd);
             DataSet ds = new DataSet();
@@ -148,7 +144,7 @@ namespace LibraryManagement
             SqlCommand cmd = new SqlCommand();
             cmd.Connection = ConnDB.conn;
             cmd.CommandText = "Select * From Users Where Id = @p1";
-            cmd.Parameters.AddWithValue("@p1", userId);
+            cmd.Parameters.AddWithValue("@p1", int.Parse(userId));
 
             SqlDataAdapter da = new SqlDataAdapter(cmd);
             DataSet ds = new DataSet();
