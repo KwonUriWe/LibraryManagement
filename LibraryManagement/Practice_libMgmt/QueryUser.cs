@@ -91,7 +91,7 @@ namespace LibraryManagement
                 }
                 else if (CheckBwd(userId) > 0)
                 {
-                    return "대여중인 도서. 반납 후 삭제 가능.";
+                    return "대여중인 도서 존재. 반납 후 삭제 가능.";
                 }
                 else
                 {
@@ -156,7 +156,6 @@ namespace LibraryManagement
 
             return count;
         }
-
 
         //저장된 마지막 Id값 확인 쿼리
         public static int Query_nextId()

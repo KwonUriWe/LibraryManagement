@@ -13,7 +13,10 @@ namespace LibraryManagement
             InitializeComponent();
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
 
-            Text = "도서관 관리_DB";
+            Text = "도서관 관리";
+
+            viewAllUsers();
+            viewAllBooks();
 
             //전체 도서 수
             label_allBookCnt.Text = QueryMain.Query_count("all");
@@ -26,9 +29,6 @@ namespace LibraryManagement
 
             //연체 중인 도서 수
             label_allOverdueCnt.Text = QueryMain.Query_count("ovrd");
-
-            viewAllUsers();
-            viewAllBooks();
         }
 
         //dataGridView_user 출력 메소드
@@ -38,7 +38,7 @@ namespace LibraryManagement
 
             SqlCommand cmd = new SqlCommand();
             cmd.Connection = ConnDB.conn;
-            cmd.CommandText = "Select * From Users order by id";
+            cmd.CommandText = "Select * From Users order by id desc";
 
             DataSet ds = new DataSet();
             SqlDataAdapter da = new SqlDataAdapter(cmd);
@@ -71,7 +71,7 @@ namespace LibraryManagement
             return;
         }
 
-        //대여 버튼 클릭
+        //대여 버튼 클릭시 발생하는 이벤트
         private void button_Borrow_Click(object sender, EventArgs e)
         {
             string userId = label_userId.Text;
@@ -89,7 +89,7 @@ namespace LibraryManagement
             }
         }
 
-        //반납 버튼 클릭
+        //반납 버튼 클릭시 발생하는 이벤트
         private void button_Return_Click(object sender, EventArgs e)
         {
             string userId = label_userId.Text;
@@ -107,7 +107,7 @@ namespace LibraryManagement
             }
         }
 
-        //도서관리 메뉴 클릭
+        //도서관리 메뉴 클릭시 발생하는 이벤트
         private void 도서관리ToolStripMenuItem_Click(object sender, EventArgs e)
         {
             FormBook form = new FormBook();
@@ -115,8 +115,8 @@ namespace LibraryManagement
             form.ShowDialog();
             viewAllBooks();
         }
-        
-        //사용자관리 메뉴 클릭
+
+        //사용자관리 메뉴 클릭시 발생하는 이벤트
         private void 사용자관리ToolStripMenuItem_Click(object sender, EventArgs e)
         {
             FormUser form = new FormUser();
@@ -154,6 +154,7 @@ namespace LibraryManagement
             }
         }
 
+        //도서 검색 버튼 클릭시 발생하는 이벤트
         private void button_sBook_Click(object sender, EventArgs e)
         {
             int n1 = 0;
@@ -201,6 +202,7 @@ namespace LibraryManagement
             return;
         }
 
+        //사용자 검색 버튼 클릭시 발생하는 이벤트
         private void button_sUser_Click(object sender, EventArgs e)
         {
             int n1 = 0;

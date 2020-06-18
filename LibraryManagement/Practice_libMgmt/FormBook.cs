@@ -75,7 +75,7 @@ namespace LibraryManagement
             };
         }
 
-        //dataGridView_book 출력 쿼리
+        //dataGridView_booklist 출력 메소드
         private void viewAllBooks()
         {
             ConnDB.ConnectDB();
@@ -95,6 +95,7 @@ namespace LibraryManagement
             return;
         }
 
+        //DataGridView가 바뀌었을때 발생하는 이벤트
         private void dataGridView_booklist_CurrentCellChanged(object sender, EventArgs e)
         {
             try
@@ -118,6 +119,54 @@ namespace LibraryManagement
             textBox_bookName.Text = "";
             textBox_publisher.Text = "";
             textBox_page.Text = "";
+        }
+
+        //도서 검색 버튼 클릭시 발생하는 이벤트
+        private void button_sBook_Click(object sender, EventArgs e)
+        {
+            int n1 = 0;
+            string sbook = "%" + textBox_book.Text + "%";
+            bool canConvert = int.TryParse(textBox_book.Text, out n1);
+
+            //입력값이 숫자로 변환되는지 확인. 숫자이면 id값, 아니면 name값
+            if (canConvert == true)
+            {
+                ConnDB.ConnectDB();
+
+                SqlCommand cmd = new SqlCommand();
+                cmd.Connection = ConnDB.conn;
+                cmd.CommandText = "Select * From Books where Isbn like @p1 order by Isbn";
+                cmd.Parameters.AddWithValue("@p1", sbook);
+
+                DataSet ds = new DataSet();
+                SqlDataAdapter da = new SqlDataAdapter(cmd);
+                da.Fill(ds, "Books");
+
+                dataGridView_booklist.DataSource = ds;
+                dataGridView_booklist.DataMember = "Books";
+
+                ConnDB.conn.Close();
+            }
+            else
+            {
+                ConnDB.ConnectDB();
+
+                SqlCommand cmd = new SqlCommand();
+                cmd.Connection = ConnDB.conn;
+                cmd.CommandText = "Select * From Books where Name like @p1 order by Isbn";
+                cmd.Parameters.AddWithValue("@p1", sbook);
+
+                DataSet ds = new DataSet();
+                SqlDataAdapter da = new SqlDataAdapter(cmd);
+                da.Fill(ds, "Books");
+
+                dataGridView_booklist.DataSource = ds;
+                dataGridView_booklist.DataMember = "Books";
+
+                ConnDB.conn.Close();
+            }
+
+            return;
         }
 
         //로그저장 메소드

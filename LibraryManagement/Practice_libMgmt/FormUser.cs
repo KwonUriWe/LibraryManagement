@@ -70,14 +70,14 @@ namespace LibraryManagement
             };
         }
 
-        //dataGridView_book 출력 메소드
+        //dataGridView_userlist 출력 메소드
         private void viewAllUsers()
         {
             ConnDB.ConnectDB();
 
             SqlCommand cmd = new SqlCommand();
             cmd.Connection = ConnDB.conn;
-            cmd.CommandText = "Select * From Users order by id";
+            cmd.CommandText = "Select * From Users order by id desc";
 
             DataSet ds = new DataSet();
             SqlDataAdapter da = new SqlDataAdapter(cmd);
@@ -110,6 +110,54 @@ namespace LibraryManagement
         {
             textBox_id.Text = "";
             textBox_name.Text = "";
+        }
+
+        //사용자 검색 버튼 클릭시 발생하는 이벤트
+        private void button_sUser_Click(object sender, EventArgs e)
+        {
+            int n1 = 0;
+            string sUser = "%" + textBox_user.Text + "%";
+            bool canConvert = int.TryParse(textBox_user.Text, out n1);
+
+            //입력값이 숫자로 변환되는지 확인. 숫자이면 id값, 아니면 name값
+            if (canConvert == true)
+            {
+                ConnDB.ConnectDB();
+
+                SqlCommand cmd = new SqlCommand();
+                cmd.Connection = ConnDB.conn;
+                cmd.CommandText = "Select * From Users where Id like @p1 order by Id desc";
+                cmd.Parameters.AddWithValue("@p1", sUser);
+
+                DataSet ds = new DataSet();
+                SqlDataAdapter da = new SqlDataAdapter(cmd);
+                da.Fill(ds, "Users");
+
+                dataGridView_userlist.DataSource = ds;
+                dataGridView_userlist.DataMember = "Users";
+
+                ConnDB.conn.Close();
+            }
+            else
+            {
+                ConnDB.ConnectDB();
+
+                SqlCommand cmd = new SqlCommand();
+                cmd.Connection = ConnDB.conn;
+                cmd.CommandText = "Select * From Users where Name like @p1 order by Id desc";
+                cmd.Parameters.AddWithValue("@p1", sUser);
+
+                DataSet ds = new DataSet();
+                SqlDataAdapter da = new SqlDataAdapter(cmd);
+                da.Fill(ds, "Users");
+
+                dataGridView_userlist.DataSource = ds;
+                dataGridView_userlist.DataMember = "Users";
+
+                ConnDB.conn.Close();
+            }
+
+            return;
         }
 
         //로그저장 메소드

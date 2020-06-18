@@ -84,7 +84,7 @@ namespace LibraryManagement
                 {
                     return "존재하지 않는 Isbn. Isbn값 삭제 불가.";
                 }
-                else if (QueryBook.CheckBwd(isbn) > 0)
+                else if (CheckBwd(isbn) == 1)
                 {
                     return "대여중인 도서. 반납 후 삭제 가능.";
                 }
@@ -117,7 +117,7 @@ namespace LibraryManagement
 
             SqlCommand cmd = new SqlCommand();
             cmd.Connection = ConnDB.conn;
-            cmd.CommandText = "Select isbn From Books Where Isbn = @p1";
+            cmd.CommandText = "Select isbn From Books Where Isbn = @p1 and isBorrowed = 1";
             cmd.Parameters.AddWithValue("@p1", isbn);
 
             SqlDataAdapter da = new SqlDataAdapter(cmd);
@@ -130,7 +130,6 @@ namespace LibraryManagement
 
             return count;
         }
-
 
         //Isbn 존재 여부 확인 쿼리
         public static int CheckDplct(string isbn)
